@@ -1,0 +1,121 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="images\p0.png" />
+    <None Remove="images\p1.png" />
+    <None Remove="images\p10.png" />
+    <None Remove="images\p11.png" />
+    <None Remove="images\p12.png" />
+    <None Remove="images\p13.png" />
+    <None Remove="images\p14.png" />
+    <None Remove="images\p15.png" />
+    <None Remove="images\p16.png" />
+    <None Remove="images\p17.png" />
+    <None Remove="images\p18.png" />
+    <None Remove="images\p19.png" />
+    <None Remove="images\p2.png" />
+    <None Remove="images\p20.png" />
+    <None Remove="images\p21.png" />
+    <None Remove="images\p22.png" />
+    <None Remove="images\p23.png" />
+    <None Remove="images\p24.png" />
+    <None Remove="images\p25.png" />
+    <None Remove="images\p26.png" />
+    <None Remove="images\p27.png" />
+    <None Remove="images\p28.png" />
+    <None Remove="images\p29.png" />
+    <None Remove="images\p3.png" />
+    <None Remove="images\p30.png" />
+    <None Remove="images\p31.png" />
+    <None Remove="images\p32.png" />
+    <None Remove="images\p33.png" />
+    <None Remove="images\p34.png" />
+    <None Remove="images\p35.png" />
+    <None Remove="images\p36.png" />
+    <None Remove="images\p37.png" />
+    <None Remove="images\p38.png" />
+    <None Remove="images\p39.png" />
+    <None Remove="images\p4.png" />
+    <None Remove="images\p40.png" />
+    <None Remove="images\p41.png" />
+    <None Remove="images\p42.png" />
+    <None Remove="images\p43.png" />
+    <None Remove="images\p44.png" />
+    <None Remove="images\p45.png" />
+    <None Remove="images\p46.png" />
+    <None Remove="images\p47.png" />
+    <None Remove="images\p48.png" />
+    <None Remove="images\p49.png" />
+    <None Remove="images\p5.png" />
+    <None Remove="images\p50.png" />
+    <None Remove="images\p51.png" />
+    <None Remove="images\p6.png" />
+    <None Remove="images\p7.png" />
+    <None Remove="images\p8.png" />
+    <None Remove="images\p9.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="images\p0.png" />
+    <Resource Include="images\p1.png" />
+    <Resource Include="images\p10.png" />
+    <Resource Include="images\p11.png" />
+    <Resource Include="images\p12.png" />
+    <Resource Include="images\p13.png" />
+    <Resource Include="images\p14.png" />
+    <Resource Include="images\p15.png" />
+    <Resource Include="images\p16.png" />
+    <Resource Include="images\p17.png" />
+    <Resource Include="images\p18.png" />
+    <Resource Include="images\p19.png" />
+    <Resource Include="images\p2.png" />
+    <Resource Include="images\p20.png" />
+    <Resource Include="images\p21.png" />
+    <Resource Include="images\p22.png" />
+    <Resource Include="images\p23.png" />
+    <Resource Include="images\p24.png" />
+    <Resource Include="images\p25.png" />
+    <Resource Include="images\p26.png" />
+    <Resource Include="images\p27.png" />
+    <Resource Include="images\p28.png" />
+    <Resource Include="images\p29.png" />
+    <Resource Include="images\p3.png" />
+    <Resource Include="images\p30.png" />
+    <Resource Include="images\p31.png" />
+    <Resource Include="images\p32.png" />
+    <Resource Include="images\p33.png" />
+    <Resource Include="images\p34.png" />
+    <Resource Include="images\p35.png" />
+    <Resource Include="images\p36.png" />
+    <Resource Include="images\p37.png" />
+    <Resource Include="images\p38.png" />
+    <Resource Include="images\p39.png" />
+    <Resource Include="images\p4.png" />
+    <Resource Include="images\p40.png" />
+    <Resource Include="images\p41.png" />
+    <Resource Include="images\p42.png" />
+    <Resource Include="images\p43.png" />
+    <Resource Include="images\p44.png" />
+    <Resource Include="images\p45.png" />
+    <Resource Include="images\p46.png" />
+    <Resource Include="images\p47.png" />
+    <Resource Include="images\p48.png" />
+    <Resource Include="images\p49.png" />
+    <Resource Include="images\p5.png" />
+    <Resource Include="images\p50.png" />
+    <Resource Include="images\p51.png" />
+    <Resource Include="images\p6.png" />
+    <Resource Include="images\p7.png" />
+    <Resource Include="images\p8.png" />
+    <Resource Include="images\p9.png" />
+  </ItemGroup>
+
+</Project>
