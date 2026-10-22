@@ -10,16 +10,59 @@ namespace Blackjack
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public ObservableCollection<Card> Deck { get; set; } = NewDeck();
+        private DeckInspector? _inspector;
+        private ObservableCollection<Card> _Deck;
+        public ObservableCollection<Card> Deck
+        {
+            get => _Deck;
+            set
+            {
+                if (_Deck != null)
+                {
+                    _Deck.CollectionChanged -= OnCollectionChanged;
+                }
+                _Deck = value;
+                if (_Deck != null)
+                {
+                    _Deck.CollectionChanged += OnCollectionChanged;
+                }
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(CardCount));
+            }
+        }
+        public int CardCount => Deck?.Count ?? 0; // defaulting to 0 if null
         public ObservableCollection<Card> PlayerHand { get; set; } = new ObservableCollection<Card>();
         public ObservableCollection<Card> DealerHand { get; set; } = new ObservableCollection<Card>();
-        public static bool isActive;
-        public int DealerHandTotal = 0;
-        public int PlayerHandTotal = 0;
+        private int _DealerHandTotal;
+        public int DealerHandTotal
+        {
+            get => _DealerHandTotal;
+            set
+            {
+                if (_DealerHandTotal != value)
+                {
+                    _DealerHandTotal = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int _PlayerHandTotal;
+        public int PlayerHandTotal
+        {
+            get => _PlayerHandTotal;
+            set
+            {
+                if (_PlayerHandTotal != value)
+                {
+                    _PlayerHandTotal = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = this;
+            this.DataContext = this;
         }
 
         public ObservableCollection<Card> Shuffle(ObservableCollection<Card> deck)
@@ -36,37 +79,43 @@ namespace Blackjack
         }
         public void StartNewGame()
         {
-            isActive = true;
+            ButtonHit.IsEnabled = true;
             Deck = Shuffle(NewDeck());
             PlayerHand.Clear();
             DealerHand.Clear();
-            DealPlayer();
-            DealPlayer();
-            DealDealer();
+            PlayerHandTotal = DealPlayer();
+            DealerHandTotal = DealDealer();
         }
 
-        public void DealDealer()
+        public int DealDealer()
         {
             do
             {
                 Card card = Deck[0];
                 Deck.RemoveAt(0);
                 DealerHand.Add(card);
-                DealerHandTotal = CalculateHandTotal(DealerHand);
             } while (DealerHand.Count < 2);
-            return;
+            return CalculateHandTotal(DealerHand);
         }
 
-        public void DealPlayer()
+        public int DealPlayer()
         {
-            if (Deck.Count > 0)
+            if (PlayerHand.Count == 0)
+            {
+                do
+                {
+                    Card card = Deck[0];
+                    Deck.RemoveAt(0);
+                    PlayerHand.Add(card);
+                } while (PlayerHand.Count < 2);
+            }
+            else
             {
                 Card card = Deck[0];
                 Deck.RemoveAt(0);
                 PlayerHand.Add(card);
-                PlayerHandTotal = CalculateHandTotal(PlayerHand);
             }
-            return;
+            return CalculateHandTotal(PlayerHand);
         }
 
         public static ObservableCollection<Card> NewDeck()
@@ -101,7 +150,7 @@ namespace Blackjack
             {
                 total += 10; // counting aces as 11 instead of 1 (adding 10, already counted the 1 when iterating over the collection)
                 aceCount--;
-            } 
+            }
             return total;
         }
 
@@ -113,9 +162,14 @@ namespace Blackjack
                 new PropertyChangedEventArgs(propertyName));
         }
 
+        private void OnCollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(CardCount));
+        }
+
         private void ButtonHit_Click(object sender, RoutedEventArgs e)
         {
-            DealPlayer();
+            PlayerHandTotal = DealPlayer();
         }
 
         private void ButtonNewRound_Click(object sender, RoutedEventArgs e)
@@ -124,8 +178,26 @@ namespace Blackjack
         }
         private void ButtonOpenDeckInspector_Click(object sender, RoutedEventArgs e)
         {
-
+            if (_inspector == null)
+            {
+                _inspector = new DeckInspector();
+                _inspector.Closed += (closedSender, args) => _inspector = null;
+                _inspector.Show();
+                _inspector.DataContext = this;
+            }
+            else
+            {
+                _inspector.Activate();
+            }
+            
         }
+        public void MoveItems(int oldIndex, int newIndex)
+        {
+            if (oldIndex < 0 || oldIndex >= Deck.Count || newIndex < 0 || newIndex >= Deck.Count)
+                return;
+            Deck.Move(oldIndex, newIndex);
+        }
+
 
     }
 }

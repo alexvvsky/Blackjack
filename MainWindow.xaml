@@ -10,18 +10,19 @@
     <Window.Resources>
         <local:ImageConverter x:Key="ImageConverter" />
         <DataTemplate x:Key="CardTemplate">
-            <StackPanel Orientation="Vertical">
-                <Image Source="{Binding CardImage, Converter={StaticResource ImageConverter}}" MaxHeight="130"/>
-                <TextBlock Text="{Binding Name}" Foreground="White" FontSize="16" Margin="5"/>
+            <StackPanel Orientation="Vertical" MinWidth="150">
+                <Image Source="{Binding CardImage, Converter={StaticResource ImageConverter}}" MaxHeight="130" HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Name}" Foreground="White" FontSize="16" Margin="5" HorizontalAlignment="Center" />
             </StackPanel>
         </DataTemplate>
     </Window.Resources>
 
     <Canvas>
         <StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Dealer's Hand" Foreground="White" FontSize="14" Canvas.Top="10" Canvas.Left="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <Label Content="{Binding DealerHandTotal}" Foreground="White" Margin="40,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Canvas.Top="10" Canvas.Left="10" Height="30">
+                <Label Content="Dealer's Hand" Foreground="White" FontSize="16" HorizontalAlignment="Left"/>
+                <Label Content="Score:" Foreground="White" FontSize="16" FontStyle="Italic" />
+                <Label Content="{Binding DealerHandTotal}" Foreground="White" FontSize="16" FontStyle="Italic" Padding="0, 5, 5, 5"/>
             </StackPanel>
             
             <ListBox x:Name="ListBoxDealerHand" ItemsSource="{Binding DealerHand}" ItemTemplate="{StaticResource CardTemplate}" Background="Transparent" Height="180" Width="600" Canvas.Top="10" Canvas.Left="10">
@@ -31,11 +32,12 @@
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
             </ListBox>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Player's Hand" Foreground="White" FontSize="14" Canvas.Top="190" Canvas.Left="10" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <Label Content="{Binding PlayerHandTotal}" Foreground="White" Margin="40,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" Height="30" Canvas.Top="190" Canvas.Left="10" >
+                <Label Content="Player's Hand" Foreground="White" FontSize="16" HorizontalAlignment="Left"/>
+                <Label Content="Score:" Foreground="White" FontSize="16" FontStyle="Italic" />
+                <Label Content="{Binding PlayerHandTotal}" Foreground="White" FontSize="16" Padding="0, 5, 5, 5"  FontStyle="Italic"/>
             </StackPanel>
-            <ListBox x:Name="ListBoxPlayerHand" ItemsSource="{Binding PlayerHand}" ItemTemplate="{StaticResource CardTemplate}" Background="Transparent" Height="180" Width="600" Canvas.Top="190" Canvas.Left="10" HorizontalAlignment="Center" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <ListBox x:Name="ListBoxPlayerHand" ItemsSource="{Binding PlayerHand}" ItemTemplate="{StaticResource CardTemplate}" Background="Transparent" MinHeight="200" Width="600" Canvas.Top="190" Canvas.Left="10" HorizontalAlignment="Center" VerticalAlignment="Top" ScrollViewer.HorizontalScrollBarVisibility="Auto">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal"></StackPanel>
@@ -46,7 +48,7 @@
         <TextBlock Foreground="#E4E6D8"  Canvas.Bottom="40" Canvas.Left="10" Text="Click Hit to draw a card, or quietly consult the Deck Inspector."/>
         <StackPanel Canvas.Bottom="10" Canvas.Left="10" Orientation="Horizontal">
             <Button x:Name="ButtonNewRound" Content="New Round" Padding="10, 5" Click="ButtonNewRound_Click"/>
-            <Button x:Name="ButtonHit" Content="Hit" Margin="10,0,0,0" Padding="10, 5" Click="ButtonHit_Click"/>
+            <Button x:Name="ButtonHit" IsEnabled="False" Content="Hit" Margin="10,0,0,0" Padding="10, 5" Click="ButtonHit_Click"/>
             <Button x:Name="ButtonOpenDeckInspector" Content="Open Deck Inspector" Margin="10,0,0,0" Padding="10, 5" Click="ButtonOpenDeckInspector_Click"/>
         </StackPanel>
 
